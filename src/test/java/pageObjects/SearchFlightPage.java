@@ -35,4 +35,7 @@ public class SearchFlightPage {
 	@FindBy(how = How.XPATH, using = "//input[@name='servClass' and @Value ='First']")
 	public WebElement firstClass_radioBtn;
 
+	@FindBy(how = How.XPATH, using = "//input[@name='findFlights']")
+	public WebElement continue_Button;
+
 }

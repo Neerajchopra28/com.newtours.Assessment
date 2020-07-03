@@ -16,11 +16,11 @@ public class Book_A_FlightPage {
 	}
 	
 	//ongoing fight name & Number
-	@FindBy(how = How.XPATH, using = "(//font/b)[2]")
+	@FindBy(how = How.XPATH, using = "//td[@class ='data_left']/font[@face='ARIAL']/b")
 	public WebElement BookingFlight_Ongoig;
 	
 	//Return Flight name & Number
-	@FindBy(how = How.XPATH, using = "(//font/b)[3]")
+	@FindBy(how = How.XPATH, using = "//td[@class ='data_left']/font/font/font/b")
 	public WebElement BookingFlight_Return;
 
 

@@ -21,11 +21,11 @@ public class LoginPage {
 	public WebElement date_Visibility;
 
 	// Aruba image
-	@FindBy(how = How.XPATH, using = "//img[@width = '488' and @height = '63']")
+	@FindBy(how = How.XPATH, using = "//img[@src='/images/banner2.gif']")
 	public WebElement Aruba_Visibility;
 
 	// Sign on page visibilty for unvalid login test
-	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "registration")
+	@FindBy(how = How.XPATH, using = "//img[@src='/images/masts/mast_signon.gif']")
 	public WebElement SignOn_Visibility;
 
 	// Valid login test visibility

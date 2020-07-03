@@ -1,16 +1,25 @@
 package utility;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.DataProvider;
 
 public class Utilities {
 	static WebDriver driver;
@@ -47,21 +56,53 @@ public class Utilities {
 	}
 
 	public static String configProperties(String Arg) throws Exception {
-		
+
 		String value = "";
 		try {
 			Properties propTest = new Properties();
 
-			FileReader file = new FileReader(System.getProperty("user.dir")+ "\\config.properties");
+			FileReader file = new FileReader(System.getProperty("user.dir") + "\\config.properties");
 
 			propTest.load(file);
 
-			 value = propTest.getProperty(Arg);
+			value = propTest.getProperty(Arg);
 		} catch (Exception e) {
 			System.out.println("Unable to read config .properties file");
 		}
-				
+
 		return value;
 	}
 
+	// data provider
+	
+	public static Object[][] TestDataPassing() throws IOException {
+		String arr[][] = null;
+		File file = new File(System.getProperty("user.dir") + "\\TestWorkbook.xlsx");
+		FileInputStream fis = new FileInputStream(file);
+		XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
+
+		XSSFSheet mysheet = myWorkbook.getSheet("Sheet2");
+		int totalRows = mysheet.getLastRowNum() - mysheet.getFirstRowNum();
+		int totalColumn = mysheet.getRow(0).getLastCellNum() - mysheet.getRow(0).getFirstCellNum();
+		arr = new String[totalRows][totalColumn];
+
+		for (int i = mysheet.getFirstRowNum(); i < mysheet.getLastRowNum() - 1; i++) {
+			Row myRow = mysheet.getRow(i);
+
+			for (int j = myRow.getFirstCellNum(); j < myRow.getLastCellNum(); j++) {
+				arr[i][j] = myRow.getCell(j).getStringCellValue();
+			}
+		}
+
+		return arr;
+
+	}
+	@DataProvider(name ="TravelData")
+	public Object[][] TestDataProvider() throws Exception {
+
+		Object testObjectArray[][] = TestDataPassing();
+
+		return testObjectArray;
+
+	}
 }
