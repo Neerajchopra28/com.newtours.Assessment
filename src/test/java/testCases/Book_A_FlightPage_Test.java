@@ -42,8 +42,8 @@ public class Book_A_FlightPage_Test {
 
 	}
 
-	@Test(groups = { "Travel" })
-	public void verifyFlightDescription() throws Exception {
+	@Test(enabled = false)
+	public void SelectRadioButtons() throws Exception {
 
 		// Login website
 		objLoginPage.userName.sendKeys("mercury");
@@ -55,12 +55,119 @@ public class Book_A_FlightPage_Test {
 
 		Utilities.explicitWaiting(objSelectFlightPage.flightDetails_Return, driver);
 
-		String test_Value1 = objSelectFlightPage.ongoing_RaidioButtons.get(0).getAttribute("value");
-		System.out.println(test_Value1);
+		// getting test data from excel to select radio
+		File radiofile = new File(System.getProperty("user.dir") + "\\TestWorkbook.xlsx");
+		FileInputStream fis_radio = new FileInputStream(radiofile);
+		XSSFWorkbook radioworkbook = new XSSFWorkbook(fis_radio);
+		XSSFSheet radiosheet = radioworkbook.getSheet("Sheet1");
+		int ongoing_radioSelect = (int) radiosheet.getRow(1).getCell(0).getNumericCellValue();
+		int return_radioSelect = (int) radiosheet.getRow(1).getCell(1).getNumericCellValue();
 
 		// getting list size
 		int ongoing_RadioBtn_Size = objSelectFlightPage.ongoing_RaidioButtons.size();
 		int returning_RadioBtn_Size = objSelectFlightPage.returning_RaidioButtons.size();
+
+		// initilaizing local variable for testing
+		int ongoing_TestInt1[] = new int[ongoing_RadioBtn_Size];
+		int return_TestInt1[] = new int[returning_RadioBtn_Size];
+
+		String ongoing_radio_Text1[] = new String[ongoing_RadioBtn_Size];
+		String Split_ongoing_radio_Text1[] = new String[ongoing_RadioBtn_Size];
+
+		String return_radio_Text1[] = new String[returning_RadioBtn_Size];
+		String Split_return_radio_Text1[] = new String[returning_RadioBtn_Size];
+
+		// running nested loop if any ongoing radio button is selected then split and
+		// clicking radio buttons of respected flight which is required by user
+		// loop1 for ongoing flight
+		for (int i = 0; i < ongoing_RadioBtn_Size; i++) {
+			ongoing_radio_Text1[i] = objSelectFlightPage.ongoing_RaidioButtons.get(i).getAttribute("value");
+			Split_ongoing_radio_Text1 = ongoing_radio_Text1[i].split("\\$");
+			ongoing_TestInt1[i] = Integer.parseInt(Split_ongoing_radio_Text1[1]);
+			if (ongoing_TestInt1[i] == ongoing_radioSelect) {
+				objSelectFlightPage.ongoing_RaidioButtons.get(i).click();
+				Thread.sleep(5000);
+				break;
+
+			}
+		}
+		// loop 02 for returning flight
+		for (int i = 0; i < returning_RadioBtn_Size; i++) {
+			return_radio_Text1[i] = objSelectFlightPage.returning_RaidioButtons.get(i).getAttribute("value");
+			Split_return_radio_Text1 = return_radio_Text1[i].split("\\$");
+			return_TestInt1[i] = Integer.parseInt(Split_return_radio_Text1[1]);
+			if (return_TestInt1[i] == return_radioSelect) {
+				objSelectFlightPage.returning_RaidioButtons.get(i).click();
+				Thread.sleep(5000);
+				break;
+
+			}
+		}
+
+	}
+
+	@Test(groups = { "Travel" })
+	public void verifyFlightDescription() throws Exception {
+
+		// Login website
+		objLoginPage.userName.sendKeys("mercury");
+		objLoginPage.password.sendKeys("mercury");
+		objLoginPage.signIn_Button.click();
+
+		// press continue in search flight page
+		objSearchFlightPage.continue_Button.click();
+		// explicit wait
+		Utilities.explicitWaiting(objSelectFlightPage.flightDetails_Return, driver);
+
+		// getting test data from excel to select radio
+		File radiofile = new File(System.getProperty("user.dir") + "\\TestWorkbook.xlsx");
+		FileInputStream fis_radio = new FileInputStream(radiofile);
+		XSSFWorkbook radioworkbook = new XSSFWorkbook(fis_radio);
+		XSSFSheet radiosheet = radioworkbook.getSheet("Sheet1");
+		int ongoing_radioSelect = (int) radiosheet.getRow(1).getCell(0).getNumericCellValue();
+		int return_radioSelect = (int) radiosheet.getRow(1).getCell(1).getNumericCellValue();
+
+		// getting list size
+		int ongoing_RadioBtn_Size = objSelectFlightPage.ongoing_RaidioButtons.size();
+		int returning_RadioBtn_Size = objSelectFlightPage.returning_RaidioButtons.size();
+
+		// initilaizing local variable for testing
+		int ongoing_TestInt1[] = new int[ongoing_RadioBtn_Size];
+		int return_TestInt1[] = new int[returning_RadioBtn_Size];
+
+		String ongoing_radio_Text1[] = new String[ongoing_RadioBtn_Size];
+		String Split_ongoing_radio_Text1[] = new String[ongoing_RadioBtn_Size];
+
+		String return_radio_Text1[] = new String[returning_RadioBtn_Size];
+		String Split_return_radio_Text1[] = new String[returning_RadioBtn_Size];
+
+		// running nested loop if any ongoing radio button is selected then split and
+		// clicking radio buttons of respected flight which is required by user
+		// loop1 for ongoing flight
+		for (int i = 0; i < ongoing_RadioBtn_Size; i++) {
+			ongoing_radio_Text1[i] = objSelectFlightPage.ongoing_RaidioButtons.get(i).getAttribute("value");
+			Split_ongoing_radio_Text1 = ongoing_radio_Text1[i].split("\\$");
+			ongoing_TestInt1[i] = Integer.parseInt(Split_ongoing_radio_Text1[1]);
+			if (ongoing_TestInt1[i] == ongoing_radioSelect) {
+				objSelectFlightPage.ongoing_RaidioButtons.get(i).click();
+				break;
+
+			}
+		}
+		// loop 02 for returning flight
+		for (int i = 0; i < returning_RadioBtn_Size; i++) {
+			return_radio_Text1[i] = objSelectFlightPage.returning_RaidioButtons.get(i).getAttribute("value");
+			Split_return_radio_Text1 = return_radio_Text1[i].split("\\$");
+			return_TestInt1[i] = Integer.parseInt(Split_return_radio_Text1[1]);
+			if (return_TestInt1[i] == return_radioSelect) {
+				objSelectFlightPage.returning_RaidioButtons.get(i).click();
+				break;
+
+			}
+		}
+
+		String test_Value1 = objSelectFlightPage.ongoing_RaidioButtons.get(0).getAttribute("value");
+		System.out.println(test_Value1);
 
 		// initilaizing local variable for testing
 		ArrayList<Integer> radio_List1 = new ArrayList<Integer>();
@@ -80,10 +187,7 @@ public class Book_A_FlightPage_Test {
 		for (int i = 0; i < ongoing_RadioBtn_Size; i++) {
 			ongoing_radio_Text[i] = objSelectFlightPage.ongoing_RaidioButtons.get(i).getAttribute("value");
 			Boolean radio_Status = objSelectFlightPage.ongoing_RaidioButtons.get(i).isSelected();
-			// System.out.println(ongoing_radio_Text[i]);
-			// System.out.println(radio_Status);
 			String String_radio_Status = String.valueOf(radio_Status);
-			// System.out.println(String_radio_Status);
 			if ((String_radio_Status.equalsIgnoreCase("true"))) {
 				for (int j = 0; j < 1; j++) {
 
@@ -91,31 +195,20 @@ public class Book_A_FlightPage_Test {
 					ongoing_TestInt[i] = Integer.parseInt(Split_ongoing_radio_Text[1]);
 					radio_List1.add(ongoing_TestInt[i]);
 
-					/*
-					 * File radioFile = new File(System.getProperty("user.dir") +
-					 * "\\TestWorkbook.xlsx"); FileInputStream fis = new FileInputStream(radioFile);
-					 * XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
-					 * 
-					 * XSSFSheet mysheet = myWorkbook.getSheet("Sheet1"); Row newRow =
-					 * mysheet.getRow(0); Cell newCell = newRow.createCell(1);
-					 * newCell.setCellValue(ongoing_TestInt[i]); fis.close();
-					 */
 				}
 
 			}
 
 		}
 
-		System.out.println(radio_List1);
 		// running nested loop if any returning radio button is selected then split
 		// selected and save data in file
 
 		for (int i = 0; i < returning_RadioBtn_Size; i++) {
 			return_radio_Text[i] = objSelectFlightPage.returning_RaidioButtons.get(i).getAttribute("value");
 			Boolean radio_Status1 = objSelectFlightPage.returning_RaidioButtons.get(i).isSelected();
-			
+
 			String String_radio_Status1 = String.valueOf(radio_Status1);
-			System.out.println(String_radio_Status1);
 			if ((String_radio_Status1.equalsIgnoreCase("true"))) {
 				for (int j = 0; j < 1; j++) {
 
@@ -123,22 +216,11 @@ public class Book_A_FlightPage_Test {
 					return_TestInt[i] = Integer.parseInt(Split_return_radio_Text[1]);
 					radio_List2.add(ongoing_TestInt[i]);
 
-					/*
-					 * File radioFile = new File(System.getProperty("user.dir") +
-					 * "\\TestWorkbook.xlsx"); FileInputStream fis = new FileInputStream(radioFile);
-					 * XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
-					 * 
-					 * XSSFSheet mysheet = myWorkbook.getSheet("Sheet1"); Row newRow =
-					 * mysheet.getRow(0); Cell newCell = newRow.createCell(1);
-					 * newCell.setCellValue(ongoing_TestInt[i]); fis.close();
-					 */
 				}
 
 			}
 
 		}
-
-		System.out.println(radio_List2);
 
 		// continue to book flight page
 		objSelectFlightPage.continue_Button.click();
@@ -154,14 +236,12 @@ public class Book_A_FlightPage_Test {
 
 		String[] Split_ongoingFlight_Text = ongoingFlight_Text.split(" ");
 		String[] Split_returningFlight_Text = returningFlight_Text.split(" ");
-		String final_ongoing_flightText = Split_ongoingFlight_Text[3];
-		String final_returning_flightText = Split_returningFlight_Text[3];
-		System.out.println(final_ongoing_flightText);
-		System.out.println(final_returning_flightText);
-		// int final_ongoing_flightNo = Integer.parseInt(final_ongoing_flightText);
-		// int final_returning_flightNo = Integer.parseInt(final_returning_flightText);
 
-		// checking if flight selected is equal to flight displayed for ongoing and return
+		String final_ongoing_flightText = Split_ongoingFlight_Text[2];
+		String final_returning_flightText = Split_returningFlight_Text[2];
+
+		// checking if flight selected is equal to flight displayed for ongoing and
+		// return
 		System.out.println(Split_return_radio_Text[1]);
 		System.out.println(Split_return_radio_Text[1]);
 

@@ -44,7 +44,7 @@ public class SelectFlightPage {
 
 	//// Flight name and number selected return
 	@FindBy(how = How.XPATH, using = "(//td[@class ='data_left']/font//b)[5]")
-	public WebElement flightDetails_Return;
+	public WebElement flightDetails_Return	;
 
 	// Find Elements - radio button ongoing flight List
 	@FindAll(@FindBy(how = How.XPATH, using = "//input[@type='radio' and @name='outFlight']"))
