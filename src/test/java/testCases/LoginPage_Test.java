@@ -33,7 +33,7 @@ public class LoginPage_Test {
 		System.out.println("Before method executed");
 	}
 
-/*	// verify that current date is displayed on top section.
+	// verify that current date is displayed on top section.
 	@Test(groups = { "Travel" })
 	public void loginPage_test_01_VerifyDate() throws Exception {
 		System.out.println("verify date  method executed");
@@ -64,7 +64,7 @@ public class LoginPage_Test {
 		System.out.println("aruba object displayed");
 
 	}
-*/
+
 	// Verify that when user enters incorrect username and password then following
 	// section should be displayed.
 	@Test(dataProvider = "TravelData", groups = { "Travel" })
@@ -82,7 +82,7 @@ public class LoginPage_Test {
 
 	}
 
-	/*// Successful login
+	// Successful login
 	@Test(groups = { "Travel" })
 	public void LoginPage_test04_successfulLogin() throws Exception {
 
@@ -95,7 +95,7 @@ public class LoginPage_Test {
 				"continue button must be displayed for successful login");
 
 	}
-*/
+
 	@AfterMethod(groups = { "Travel" })
 	public void afterMethod() throws IOException, InterruptedException {
 		System.out.println("after method executed");
@@ -111,17 +111,18 @@ public class LoginPage_Test {
 
 		XSSFSheet mysheet = myWorkbook.getSheet("Sheet3");
 		int totalRows = mysheet.getLastRowNum() - mysheet.getFirstRowNum();
+		totalRows++;
 		int totalColumn = mysheet.getRow(0).getLastCellNum() - mysheet.getRow(0).getFirstCellNum();
 		arr = new String[totalRows][totalColumn];
 
-		for (int i = mysheet.getFirstRowNum(); i < mysheet.getLastRowNum() - 1; i++) {
+		for (int i = mysheet.getFirstRowNum(); i <= mysheet.getLastRowNum(); i++) {
 			Row myRow = mysheet.getRow(i);
 
 			for (int j = myRow.getFirstCellNum(); j < myRow.getLastCellNum(); j++) {
 				arr[i][j] = myRow.getCell(j).getStringCellValue();
 			}
 		}
-		System.out.println("before returning"+arr);
+		System.out.println("before returning" + arr);
 		return arr;
 
 	}

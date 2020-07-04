@@ -58,7 +58,8 @@ public class SelectFlightPage_Test {
 		int listSize = objSelectFlightPage.Flight_Prices.size();
 		String flight_Text[] = new String[listSize];
 		String Split_flight_Text[] = new String[listSize];
-		//running nested loop for splitting each element coverig into integer and adding into list's 
+		// running nested loop for splitting each element coverig into integer and
+		// adding into list's
 		for (int i = 0; i < listSize - 4; i++) {
 			flight_Text[i] = objSelectFlightPage.Flight_Prices.get(i).getText();
 			for (int j = 0; j < 1; j++) {
@@ -72,11 +73,11 @@ public class SelectFlightPage_Test {
 			}
 
 		}
-		//sorting one list
+		// sorting one list
 		System.out.println(Test_List1);
 		System.out.println(Sorted_Test_List2);
 		Collections.sort(Sorted_Test_List2);
-		//condition for testing
+		// condition for testing
 		Assert.assertTrue(Test_List1.equals(Sorted_Test_List2), "price of flights must be in sorted order");
 
 		/*
@@ -98,8 +99,8 @@ public class SelectFlightPage_Test {
 		 * arrInt[2] = Integer.parseInt(SplitS3[1]); arrInt[3] =
 		 * Integer.parseInt(SplitS4[1]);
 		 * 
-		 * // Adding Integer array elements in List1 and List 2 for (int i = 0; i < 4;
-		 * i++) { List1.add(arrInt[i]); List2.add(arrInt[i]);
+		 * // Adding Integer array elements in List1 and List 2 for (int i = 0; i <
+		 * 4;i++) { List1.add(arrInt[i]); List2.add(arrInt[i]);
 		 * 
 		 * } System.out.println(List1); System.out.println(List2); // Sorting list
 		 * Collections.sort(List1); // checking if both are same or not ?

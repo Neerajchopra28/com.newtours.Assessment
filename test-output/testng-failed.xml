@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testCases.LoginPage_Test">
+      <class name="testCases.Book_A_FlightPage_Test">
         <methods>
+          <include name="verifyFlightDescription"/>
           <include name="beforeMethod"/>
           <include name="afterMethod"/>
-          <include name="LoginPage_test03_failedPassword" invocation-numbers="0"/>
         </methods>
-      </class> <!-- testCases.LoginPage_Test -->
+      </class> <!-- testCases.Book_A_FlightPage_Test -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
