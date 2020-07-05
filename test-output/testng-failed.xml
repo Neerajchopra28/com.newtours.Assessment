@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testCases.Book_A_FlightPage_Test">
+      <class name="testCases.SearchFlightPage_Test">
         <methods>
-          <include name="verifyFlightDescription"/>
+          <include name="searchFlightPage_test_01_selectItinerary"/>
           <include name="beforeMethod"/>
           <include name="afterMethod"/>
         </methods>
-      </class> <!-- testCases.Book_A_FlightPage_Test -->
+      </class> <!-- testCases.SearchFlightPage_Test -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

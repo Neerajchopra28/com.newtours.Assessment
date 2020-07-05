@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -105,4 +107,25 @@ public class Utilities {
 		return testObjectArray;
 
 	}
+	
+	public static String getDataFromTestDataExcel(String key) throws IOException
+	{
+		String value="";
+		File myFile =    new File(System.getProperty("user.dir")+"\\TESTWORKBOOK.xlsx");
+	    FileInputStream fis = new FileInputStream(myFile);
+	    XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
+	    XSSFSheet mySheet=myWorkbook.getSheet("Searchflightdata");
+	    int rowCount = mySheet.getLastRowNum()-mySheet.getFirstRowNum();
+
+	    for (int i = 0; i < rowCount+1; i++) {
+	    	Row myRow=mySheet.getRow(i);
+			if(myRow.getCell(0).getStringCellValue().equals(key))
+			{
+				value=myRow.getCell(1).getStringCellValue();
+			}
+
+	    }
+	    return value;
+	}
+
 }

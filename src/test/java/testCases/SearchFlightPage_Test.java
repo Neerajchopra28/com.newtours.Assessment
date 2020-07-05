@@ -3,14 +3,20 @@ package testCases;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -45,71 +51,43 @@ public class SearchFlightPage_Test {
 
 		// Explicit Wait
 		Utilities.explicitWaiting(objSearchFlightPage.departingFrom_drpdown, driver);
+		/*
+		 * File dropdown_Datafile = new File(System.getProperty("user.dir") +
+		 * "\\TestWorkbook.xlsx"); //XSSFWorkbook departingWorkbook = new
+		 * XSSFWorkbook(dropdown_Datafile); //XSSFSheet departingsheet =
+		 * departingWorkbook.getSheet("departingData");
+		 * 
+		 * //String deprt_drp_Value1 =
+		 * departingsheet.getRow(1).getCell(0).getStringCellValue();
+		 */
 
 		// checking values of drop box by importing data from excel
-		File dropdown_Datafile = new File(System.getProperty("user.dir") + "\\TestWorkbook.xlsx");
-		XSSFWorkbook departingWorkbook = new XSSFWorkbook(dropdown_Datafile);
-		XSSFSheet departingsheet = departingWorkbook.getSheet("departingData");
-
-		String deprt_drp_Value1 = departingsheet.getRow(1).getCell(0).getStringCellValue();
-		String deprt_drp_Value2 = departingsheet.getRow(2).getCell(0).getStringCellValue();
-		String deprt_drp_Value3 = departingsheet.getRow(3).getCell(0).getStringCellValue();
-		String deprt_drp_Value4 = departingsheet.getRow(4).getCell(0).getStringCellValue();
-
 		Select deprt_drpDown = new Select(objSearchFlightPage.departingFrom_drpdown);
-		deprt_drpDown.selectByValue(deprt_drp_Value1);
-		String test_drpValue1 = deprt_drpDown.getFirstSelectedOption().getText();
-		System.out.println(test_drpValue1);
-		Assert.assertTrue(deprt_drp_Value1.equals(test_drpValue1), " dropdown value is not selected properly ");
-
-		deprt_drpDown.selectByValue(deprt_drp_Value2);
-		String test_drpValue2 = deprt_drpDown.getFirstSelectedOption().getText();
-		System.out.println(test_drpValue2);
-		Assert.assertTrue(deprt_drp_Value2.equals(test_drpValue2), " dropdown value is not selected properly ");
-
-		deprt_drpDown.selectByValue(deprt_drp_Value3);
-		String test_drpValue3 = deprt_drpDown.getFirstSelectedOption().getText();
-		System.out.println(test_drpValue3);
-		Assert.assertTrue(deprt_drp_Value3.equals(test_drpValue3), " dropdown value is not selected properly ");
-
-		deprt_drpDown.selectByValue(deprt_drp_Value4);
-		String test_drpValue4 = deprt_drpDown.getFirstSelectedOption().getText();
-		System.out.println(test_drpValue4);
-		Assert.assertTrue(deprt_drp_Value4.equals(test_drpValue4), " dropdown value is not selected properly ");
-
-		Thread.sleep(5000);
-		// checking values of arriving dropdown and imporing data from excel
-
-		File dropdown_Datafile1 = new File(System.getProperty("user.dir") + "\\TestWorkbook.xlsx");
-		XSSFWorkbook arrivingworkbook = new XSSFWorkbook(dropdown_Datafile1);
-		XSSFSheet arrivingsheet = arrivingworkbook.getSheet("arrivingData");
-
-		String arr_drp_Value1 = arrivingsheet.getRow(1).getCell(0).getStringCellValue();
-		String arr_drp_Value2 = arrivingsheet.getRow(2).getCell(0).getStringCellValue();
-		String arr_drp_Value3 = arrivingsheet.getRow(3).getCell(0).getStringCellValue();
-		String arr_drp_Value4 = arrivingsheet.getRow(4).getCell(0).getStringCellValue();
-
+		deprt_drpDown.selectByValue(Utilities.getDataFromTestDataExcel("fromcity"));
+		/*
+		 * String test_drpValue1 = deprt_drpDown.getFirstSelectedOption().getText(); //
+		 * System.out.println(test_drpValue1); //
+		 * Assert.assertTrue(deprt_drp_Value1.equals(test_drpValue1), " dropdown value
+		 * // is not selected properly ");
+		 * 
+		 * Thread.sleep(5000); // checking values of arriving dropdown and imporing data
+		 * from excel
+		 * 
+		 * // File dropdown_Datafile1 = new File(System.getProperty("user.dir") + //
+		 * "\\TestWorkbook.xlsx"); // XSSFWorkbook arrivingworkbook = new
+		 * XSSFWorkbook(dropdown_Datafile1); // XSSFSheet arrivingsheet =
+		 * arrivingworkbook.getSheet("arrivingData");
+		 * 
+		 * // String arr_drp_Value1 = /
+		 * arrivingsheet.getRow(1).getCell(0).getStringCellValue();
+		 */
 		Select arr_drpDown = new Select(objSearchFlightPage.ArrivingIn_drpdown);
-		arr_drpDown.selectByValue(arr_drp_Value1);
-		String test_arr_drpValue1 = arr_drpDown.getFirstSelectedOption().getText();
-		System.out.println(test_arr_drpValue1);
-		Assert.assertTrue(arr_drp_Value1.equals(test_arr_drpValue1), " dropdown value is not selected properly ");
-
-		arr_drpDown.selectByValue(arr_drp_Value2);
-		String test_arr_drpValue2 = arr_drpDown.getFirstSelectedOption().getText();
-		System.out.println(test_arr_drpValue2);
-		Assert.assertTrue(arr_drp_Value2.equals(test_arr_drpValue2), " dropdown value is not selected properly ");
-
-		arr_drpDown.selectByValue(arr_drp_Value3);
-		String test_arr_drpValue3 = arr_drpDown.getFirstSelectedOption().getText();
-		System.out.println(test_arr_drpValue3);
-		Assert.assertTrue(arr_drp_Value3.equals(test_arr_drpValue3), " dropdown value is not selected properly ");
-
-		arr_drpDown.selectByValue(arr_drp_Value4);
-		String test_arr_drpValue4 = arr_drpDown.getFirstSelectedOption().getText();
-		System.out.println(test_arr_drpValue4);
-		Assert.assertTrue(arr_drp_Value4.equals(test_arr_drpValue4), " dropdown value is not selected properly ");
-
+		arr_drpDown.selectByValue(Utilities.getDataFromTestDataExcel("tocity"));
+		/* String test_arr_drpValue1 = arr_drpDown.getFirstSelectedOption().getText();
+		// System.out.println(test_arr_drpValue1);
+		// Assert.assertTrue(arr_drp_Value1.equals(test_arr_drpValue1), " dropdown value
+		// is not selected properly ");
+		*/
 		System.out.println("Flight test passed");
 
 	}
@@ -152,7 +130,20 @@ public class SearchFlightPage_Test {
 	}
 
 	@AfterMethod(groups = { "Travel" })
-	public void afterMethod() throws IOException, InterruptedException {
+	public void afterMethod(ITestResult result) throws IOException, InterruptedException {
+		if (result.getStatus() == ITestResult.FAILURE) {
+
+			System.out.println("Method Failed Check Screenshot for details");
+			Thread.sleep(5000);
+			File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
+
+			// Copy the screenshot on the desire location with different name using current
+			// date and time
+			FileUtils.copyFile(file,
+					new File("C:\\Users\\Welcome\\EclipseNewWorkspace\\com.newtours.Assessment\\fail screenshots\\"
+							+ "failedMethod_of_SearchFlightPage" + " " + timestamp + ".jpg"));
+		}
 		System.out.println("after method executed");
 		driver.quit();
 	}

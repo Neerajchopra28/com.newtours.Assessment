@@ -3,16 +3,22 @@ package testCases;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -253,7 +259,18 @@ public class Book_A_FlightPage_Test {
 	}
 
 	@AfterMethod(groups = { "Travel" })
-	public void afterMethod() throws IOException, InterruptedException {
+	public void afterMethod(ITestResult result) throws IOException, InterruptedException {
+		if (result.getStatus() == ITestResult.FAILURE) {
+			
+			System.out.println("Method Failed Check Screenshot for details");
+			Thread.sleep(5000);
+			File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			String timestamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
+
+			// Copy the screenshot on the desire location with different name using current
+			// date and time
+			FileUtils.copyFile(file, new File("C:\\Users\\Welcome\\EclipseNewWorkspace\\com.newtours.Assessment\\fail screenshots\\" + "failedMethod_of_Book_A_FlightPage" + " " + timestamp + ".jpg"));
+		}
 		System.out.println("after method executed");
 		driver.quit();
 	}

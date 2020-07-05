@@ -2,27 +2,34 @@
 <testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="38876" started-at="2020-07-04T19:59:37 IST" finished-at="2020-07-04T20:00:16 IST">
+  <suite name="Default suite" duration-ms="45479" started-at="2020-07-05T00:49:39 IST" finished-at="2020-07-05T00:50:25 IST">
     <groups>
       <group name="Travel">
-        <method signature="Book_A_FlightPage_Test.verifyFlightDescription()[pri:0, instance:testCases.Book_A_FlightPage_Test@394e1a0f]" name="verifyFlightDescription" class="testCases.Book_A_FlightPage_Test"/>
+        <method signature="SearchFlightPage_Test.searchFlightPage_test_01_selectItinerary()[pri:0, instance:testCases.SearchFlightPage_Test@6acdbdf5]" name="searchFlightPage_test_01_selectItinerary" class="testCases.SearchFlightPage_Test"/>
       </group> <!-- Travel -->
     </groups>
-    <test name="Default test" duration-ms="38876" started-at="2020-07-04T19:59:37 IST" finished-at="2020-07-04T20:00:16 IST">
-      <class name="testCases.Book_A_FlightPage_Test">
-        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:testCases.Book_A_FlightPage_Test@394e1a0f]" name="beforeMethod" is-config="true" duration-ms="17620" started-at="2020-07-04T19:59:37 IST" finished-at="2020-07-04T19:59:55 IST">
+    <test name="Default test" duration-ms="45479" started-at="2020-07-05T00:49:39 IST" finished-at="2020-07-05T00:50:25 IST">
+      <class name="testCases.SearchFlightPage_Test">
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:testCases.SearchFlightPage_Test@6acdbdf5]" name="beforeMethod" is-config="true" duration-ms="26570" started-at="2020-07-05T00:49:39 IST" finished-at="2020-07-05T00:50:06 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method status="PASS" signature="verifyFlightDescription()[pri:0, instance:testCases.Book_A_FlightPage_Test@394e1a0f]" name="verifyFlightDescription" duration-ms="20300" started-at="2020-07-04T19:59:55 IST" finished-at="2020-07-04T20:00:15 IST">
+        <test-method status="PASS" signature="searchFlightPage_test_01_selectItinerary()[pri:0, instance:testCases.SearchFlightPage_Test@6acdbdf5]" name="searchFlightPage_test_01_selectItinerary" duration-ms="17838" started-at="2020-07-05T00:50:06 IST" finished-at="2020-07-05T00:50:24 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyFlightDescription -->
-        <test-method status="PASS" signature="afterMethod()[pri:0, instance:testCases.Book_A_FlightPage_Test@394e1a0f]" name="afterMethod" is-config="true" duration-ms="837" started-at="2020-07-04T20:00:15 IST" finished-at="2020-07-04T20:00:16 IST">
+        </test-method> <!-- searchFlightPage_test_01_selectItinerary -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testCases.SearchFlightPage_Test@6acdbdf5]" name="afterMethod" is-config="true" duration-ms="952" started-at="2020-07-05T00:50:24 IST" finished-at="2020-07-05T00:50:25 IST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=searchFlightPage_test_01_selectItinerary status=SUCCESS method=SearchFlightPage_Test.searchFlightPage_test_01_selectItinerary()[pri:0, instance:testCases.SearchFlightPage_Test@6acdbdf5] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-      </class> <!-- testCases.Book_A_FlightPage_Test -->
+      </class> <!-- testCases.SearchFlightPage_Test -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
